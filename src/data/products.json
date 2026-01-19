@@ -1,25 +1,5 @@
 [
   {
-    "id": "p001",
-    "name": "หูฟัง Bluetooth รุ่น A1",
-    "slug": "bluetooth-headphone-a1",
-    "price": 599,
-    "category": "electronics",
-    "image": "https://picsum.photos/seed/p001/400/400",
-    "affiliateUrl": "https://shopee.co.th/xxxx",
-    "description": "หูฟังบลูทูธ เสียงชัด แบตอึด"
-  },
-  {
-    "id": "p002",
-    "name": "เมาส์ไร้สาย",
-    "slug": "wireless-mouse",
-    "price": 299,
-    "category": "electronics",
-    "image": "https://picsum.photos/seed/p002/400/400",
-    "affiliateUrl": "https://shopee.co.th/xxxx",
-    "description": "เมาส์ไร้สาย จับถนัดมือ"
-  },
-  {
     "id": "p003",
     "name": "คีย์บอร์ด Mechanical",
     "slug": "mechanical-keyboard",
@@ -298,17 +278,5 @@
     "image": "https://picsum.photos/seed/p030/400/400",
     "affiliateUrl": "https://shopee.co.th/xxxx",
     "description": "สาย HDMI คุณภาพดี"
-  },
-  {
-    "id": "1768840191139",
-    "name": "test",
-    "slug": "test",
-    "price": 111,
-    "category": "general",
-    "image": "",
-    "affiliateUrl": "",
-    "description": "",
-    "seoTitle": "test",
-    "seoDescription": "test"
   }
 ]

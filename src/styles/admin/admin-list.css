@@ -1,3 +1,4 @@
+/* ================= ADMIN HEADER ================= */
 .admin-header {
   display: flex;
   justify-content: space-between;
@@ -10,6 +11,7 @@
   color: #666;
 }
 
+/* ================= SEARCH ================= */
 .admin-search {
   margin-bottom: 16px;
 }
@@ -21,16 +23,20 @@
   border: 1px solid #ddd;
 }
 
+/* ================= TABLE CARD ================= */
 .table-card {
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* ================= TABLE ROW ================= */
 .table-row {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 60px 1fr 120px 160px; /* รูป | ชื่อ | ราคา | จัดการ */
+  align-items: center;
+  gap: 12px;
   padding: 12px 16px;
   border-bottom: 1px solid #eee;
 }
@@ -40,7 +46,55 @@
   font-weight: 600;
 }
 
+/* ================= IMAGE ================= */
+.thumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumb img {
+  width: 80px;   /* ✅ 20x20 */
+  height: 50px;  /* ✅ 20x20 */
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* ================= NAME ================= */
+.name {
+  font-size: 14px;
+}
+
+/* ================= PRICE ================= */
 .price {
   color: #ee4d2d;
   font-weight: bold;
+}
+
+/* ================= ACTIONS ================= */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ================= BUTTONS ================= */
+.btn.edit {
+  background: #e0ecff;
+  color: #2563eb;
+}
+
+.btn.delete {
+  background: #dc2626;
+  color: #fff;
+}
+
+.btn.delete:hover {
+  background: #b91c1c;
+}
+
+/* ================= EMPTY ================= */
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: #999;
 }

@@ -1,3 +1,6 @@
+// src/app/api/products/route.ts
+// (ไม่มี DELETE)
+
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
@@ -34,16 +37,6 @@ export async function PUT(req: Request) {
     data[index] = body
     writeData(data)
   }
-
-  return NextResponse.json({ success: true })
-}
-
-export async function DELETE(req: Request) {
-  const data = readData()
-  const body: { id: string } = await req.json()
-
-  const newData = data.filter(p => p.id !== body.id)
-  writeData(newData)
 
   return NextResponse.json({ success: true })
 }

@@ -1,3 +1,5 @@
+// src/types/product.ts
+
 export type Product = {
   id: string
   name: string
@@ -7,7 +9,6 @@ export type Product = {
   image: string
   affiliateUrl: string
   description: string
-
   seoTitle?: string
   seoDescription?: string
 }
