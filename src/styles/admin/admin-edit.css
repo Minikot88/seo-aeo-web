@@ -1,0 +1,21 @@
+.admin-edit {
+  max-width: 720px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-grid input,
+.form-grid textarea {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.form-grid textarea {
+  min-height: 80px;
+}

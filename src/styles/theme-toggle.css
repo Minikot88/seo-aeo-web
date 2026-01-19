@@ -1,0 +1,53 @@
+.theme-switch {
+  position: relative;
+  width: 52px;
+  height: 28px;
+
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+
+  transition: background 0.25s ease;
+}
+
+/* ปุ่มเลื่อน */
+.theme-switch .thumb {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  left: 3px;
+
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* ไอคอน */
+.theme-switch .icon {
+  font-size: 12px;
+  width: 50%;
+  text-align: center;
+  pointer-events: none;
+}
+
+.theme-switch .sun {
+  margin-left: 4px;
+}
+
+.theme-switch .moon {
+  margin-right: 4px;
+}
+
+/* DARK MODE */
+.theme-switch.dark {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.theme-switch.dark .thumb {
+  transform: translateX(24px);
+}

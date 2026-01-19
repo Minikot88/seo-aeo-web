@@ -1,0 +1,28 @@
+.admin {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.admin h1 {
+  margin-bottom: 16px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: #ee4d2d;
+  color: #fff;
+}
+
+.btn.edit {
+  background: #e8f0fe;
+  color: #1a73e8;
+}
