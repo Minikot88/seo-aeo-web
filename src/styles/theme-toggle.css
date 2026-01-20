@@ -1,53 +1,118 @@
 .theme-switch {
   position: relative;
-  width: 52px;
+  width: 54px;
   height: 28px;
 
-  background: rgba(255, 255, 255, 0.35);
   border: none;
   border-radius: 999px;
-
   cursor: pointer;
+
   display: inline-flex;
   align-items: center;
+  justify-content: space-between;
 
-  transition: background 0.25s ease;
+  padding: 0 6px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.3)
+  );
+
+  backdrop-filter: blur(6px);
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.6),
+    0 4px 14px rgba(0,0,0,.15);
+
+  transition:
+    background .35s cubic-bezier(.4,0,.2,1),
+    box-shadow .25s ease,
+    transform .12s ease;
 }
 
-/* ปุ่มเลื่อน */
+/* hover / active */
+.theme-switch:hover {
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.7),
+    0 6px 20px rgba(0,0,0,.22);
+}
+
+.theme-switch:active {
+  transform: scale(0.95);
+}
+
+/* thumb */
 .theme-switch .thumb {
   position: absolute;
-  width: 22px;
-  height: 22px;
+  top: 3px;
   left: 3px;
 
-  background: white;
+  width: 22px;
+  height: 22px;
+
+  background: linear-gradient(135deg, #ffffff, #e5e7eb);
   border-radius: 50%;
-  transition: transform 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.25),
+    inset 0 1px 2px rgba(255,255,255,.8);
+
+  transition:
+    transform .4s cubic-bezier(.34,1.56,.64,1),
+    background .3s ease;
 }
 
-/* ไอคอน */
+/* icons */
 .theme-switch .icon {
-  font-size: 12px;
-  width: 50%;
-  text-align: center;
+  font-size: 13px;
+  z-index: 1;
   pointer-events: none;
+
+  opacity: .55;
+  transform: scale(.85);
+  transition:
+    opacity .25s ease,
+    transform .25s ease;
 }
 
 .theme-switch .sun {
-  margin-left: 4px;
+  color: #f59e0b;
 }
 
 .theme-switch .moon {
-  margin-right: 4px;
+  color: #6366f1;
+}
+
+/* LIGHT active */
+.theme-switch:not(.dark) .sun {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* DARK MODE */
 .theme-switch.dark {
-  background: rgba(0, 0, 0, 0.35);
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.35)
+  );
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.1),
+    0 6px 20px rgba(0,0,0,.45);
 }
 
 .theme-switch.dark .thumb {
-  transform: translateX(24px);
+  transform: translateX(26px);
+  background: linear-gradient(135deg, #1f2937, #111827);
+}
+
+.theme-switch.dark .moon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.theme-switch.dark .sun {
+  opacity: .35;
+  transform: scale(.8);
 }
