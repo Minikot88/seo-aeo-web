@@ -15,7 +15,10 @@ export default function AdminClient({ products }: Props) {
   const router = useRouter()
 
   const filtered = products.filter(p =>
-    p.name.toLowerCase().includes(q.toLowerCase())
+    [p.name, p.category, p.description]
+      .join(' ')
+      .toLowerCase()
+      .includes(q.toLowerCase())
   )
 
   async function handleDelete(id: string) {
@@ -36,6 +39,7 @@ export default function AdminClient({ products }: Props) {
 
   return (
     <main className="admin">
+      {/* Header */}
       <div className="admin-header">
         <div>
           <h1>📦 จัดการสินค้า</h1>
@@ -49,45 +53,78 @@ export default function AdminClient({ products }: Props) {
         </a>
       </div>
 
+      {/* Search */}
       <div className="admin-search">
         <input
-          placeholder="🔍 ค้นหาสินค้า..."
+          placeholder="🔍 ค้นหาสินค้า ชื่อ / หมวด / รายละเอียด..."
           value={q}
           onChange={e => setQ(e.target.value)}
         />
       </div>
 
+      {/* Table */}
       <div className="table-card">
         <div className="table-row header">
           <div>รูป</div>
-          <div>ชื่อสินค้า</div>
+          <div>สินค้า</div>
           <div>ราคา</div>
+          <div>ลิงก์</div>
           <div>จัดการ</div>
         </div>
 
-        {filtered.map(p => (
-          <div className="table-row" key={p.id}>
-            <div className="thumb">
-              <img src={p.image} alt={p.name} />
+        {filtered.map(p => {
+          const finalPrice =
+            p.discount
+              ? p.price - (p.price * p.discount) / 100
+              : p.price
+
+          return (
+            <div className="table-row" key={p.id}>
+              {/* รูป */}
+              <div className="thumb">
+                <img src={p.image} alt={p.name} />
+              </div>
+
+              {/* ชื่อ + หมวด */}
+              <div className="name">
+                <strong>{p.name}</strong>
+                <div className="category">{p.category}</div>
+                {p.discount && (
+                  <span className="discount">-{p.discount}%</span>
+                )}
+              </div>
+
+              {/* ราคา */}
+              <div className="price">
+                ฿{finalPrice.toLocaleString()}
+              </div>
+
+              {/* Affiliate */}
+              <div className="link">
+                <a
+                  href={p.affiliateUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  เปิดลิงก์
+                </a>
+              </div>
+
+              {/* Actions */}
+              <div className="actions">
+                <a href={`/admin/edit/${p.id}`} className="btn edit">
+                  แก้ไข
+                </a>
+                <button
+                  className="btn delete"
+                  onClick={() => handleDelete(p.id)}
+                >
+                  ลบ
+                </button>
+              </div>
             </div>
-
-            <div className="name">{p.name}</div>
-
-            <div className="price">฿{p.price}</div>
-
-            <div className="actions">
-              <a href={`/admin/edit/${p.id}`} className="btn edit">
-                แก้ไข
-              </a>
-              <button
-                className="btn delete"
-                onClick={() => handleDelete(p.id)}
-              >
-                ลบ
-              </button>
-            </div>
-          </div>
-        ))}
+          )
+        })}
 
         {filtered.length === 0 && (
           <div className="empty">ไม่พบสินค้า</div>

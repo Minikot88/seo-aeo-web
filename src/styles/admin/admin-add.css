@@ -1,14 +1,25 @@
+/* ================= FORM LAYOUT ================= */
 .admin-form {
-  max-width: 520px;
+  max-width: 560px;
 }
 
+/* ================= FORM CARD ================= */
 .form-card {
   background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  animation: fadeUp .35s ease both;
 }
 
+.form-card h2 {
+  font-size: 16px;
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #eee;
+}
+
+/* ================= FORM GROUP ================= */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -16,8 +27,147 @@
   margin-bottom: 16px;
 }
 
-.form-group input {
-  padding: 10px 12px;
-  border-radius: 6px;
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group small {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ================= INPUT / TEXTAREA ================= */
+.form-group input,
+.form-group textarea {
+  padding: 10px 14px;
+  border-radius: 10px;
   border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: border .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  background: #fff;
+}
+
+/* ================= FORM ROW ================= */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ================= FORM ACTIONS ================= */
+.form-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  min-width: 140px;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 640px) {
+  .form-card {
+    padding: 18px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ================= FORM ACTIONS ================= */
+.form-actions {
+  margin-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ================= BUTTON VARIANTS ================= */
+.btn.ghost {
+  background: transparent;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.btn.ghost:hover {
+  background: #f3f4f6;
+}
+
+/* ================= SAVE BUTTON ================= */
+.save-btn {
+  min-width: 160px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ================= LOADING SPINNER ================= */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.5);
+  border-top-color: #fff;
+  animation: spin .8s linear infinite;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 640px) {
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .save-btn {
+    width: 100%;
+  }
+}
+
+
+/* ================= FORM HEADER ================= */
+.form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 🔥 ตัวสำคัญ */
+  margin-bottom: 16px;
+}
+
+.form-header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* ปุ่มย้อนกลับด้านบน */
+.back-top {
+  white-space: nowrap;
+}
+
+/* hover */
+.back-top:hover {
+  background: #f3f4f6;
 }

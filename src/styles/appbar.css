@@ -33,3 +33,106 @@
   margin-left: 20px;   /* 👈 เพิ่มระยะห่างจากช่องค้นหา */
   flex-shrink: 0;
 }
+
+.logo {
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* ปุ่มย้อนกลับ */
+.back-button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background .2s ease, transform .15s ease;
+}
+
+.back-button:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+.back-button:active {
+  transform: scale(0.9);
+}
+
+.appbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/* ปุ่มเปิด popup */
+.contact-trigger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background .2s ease;
+}
+
+.contact-trigger:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+/* popup */
+.contact-popup {
+  position: absolute;
+  right: 0;
+  top: 110%;
+
+  min-width: 160px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 6px;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,.15);
+  animation: fadeDown .18s ease;
+  z-index: 100;
+}
+
+.contact-popup a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #333;
+
+  transition: background .15s ease;
+}
+
+.contact-popup a:hover {
+  background: #f3f4f6;
+}
+
+/* animation */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .contact-popup {
+    right: -10px;
+  }
+}

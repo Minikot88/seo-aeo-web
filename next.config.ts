@@ -4,7 +4,23 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
 
   images: {
-    domains: ['picsum.photos'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'down-th.img.susercontent.com',
+        pathname: '/file/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cf.shopee.co.th',
+        pathname: '/file/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        pathname: '/**',
+      },
+    ],
   },
 }
 

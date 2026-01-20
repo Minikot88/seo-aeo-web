@@ -1,20 +1,22 @@
-import { getAllProducts } from '@/lib/productService'
+import { getAllProducts, searchProducts } from '@/lib/productService'
 import ProductCard from '@/components/ProductCard'
 import { Product } from '@/types/product'
 
+type SearchParams = {
+  q?: string
+}
+
 type HomePageProps = {
-  searchParams?: Promise<{
-    q?: string
-  }>
+  searchParams?: Promise<SearchParams>
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
   const params = await searchParams
-  const q = params?.q?.toLowerCase() ?? ''
+  const q = params?.q?.trim() ?? ''
 
-  const products: Product[] = getAllProducts().filter(p =>
-    p.name.toLowerCase().includes(q)
-  )
+  const products: Product[] = q
+    ? searchProducts(q)
+    : getAllProducts()
 
   return (
     <main
@@ -27,8 +29,12 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         gap: 10,
       }}
     >
-      {products.map(p => (
-        <ProductCard key={p.id} product={p} />
+      {products.length === 0 && (
+        <p>ไม่พบสินค้าที่ค้นหา</p>
+      )}
+
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
       ))}
     </main>
   )

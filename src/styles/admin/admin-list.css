@@ -1,49 +1,81 @@
+/* ================= ADMIN WRAPPER ================= */
+.admin {
+  padding-bottom: 40px;
+}
+
 /* ================= ADMIN HEADER ================= */
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 20px;
 }
 
 .subtitle {
   font-size: 13px;
-  color: #666;
+  color: #777;
+  margin-top: 4px;
 }
 
 /* ================= SEARCH ================= */
 .admin-search {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .admin-search input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
   border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+  transition: border .2s ease, box-shadow .2s ease;
+}
+
+.admin-search input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* ================= TABLE CARD ================= */
 .table-card {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeUp .35s ease both;
 }
 
 /* ================= TABLE ROW ================= */
 .table-row {
   display: grid;
-  grid-template-columns: 60px 1fr 120px 160px; /* รูป | ชื่อ | ราคา | จัดการ */
+  grid-template-columns: 70px 1.2fr 120px 120px 160px;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background .2s ease;
+}
+
+.table-row:last-child {
+  border-bottom: none;
 }
 
 .table-row.header {
-  background: #f7f7f7;
+  background: #f8fafc;
   font-weight: 600;
+  font-size: 13px;
+  color: #555;
+}
+
+.table-row:not(.header):hover {
+  background: #f9fafb;
 }
 
 /* ================= IMAGE ================= */
@@ -54,21 +86,64 @@
 }
 
 .thumb img {
-  width: 80px;   /* ✅ 20x20 */
-  height: 50px;  /* ✅ 20x20 */
+  width: 56px;
+  height: 56px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.1);
+  transition: transform .2s ease;
+}
+
+.table-row:hover .thumb img {
+  transform: scale(1.05);
 }
 
 /* ================= NAME ================= */
 .name {
   font-size: 14px;
+  line-height: 1.4;
+}
+
+.name strong {
+  display: block;
+  font-weight: 600;
+}
+
+.category {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* ================= DISCOUNT ================= */
+.discount {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff3b3b, #ff7a7a);
+  color: #fff;
+  font-weight: 500;
 }
 
 /* ================= PRICE ================= */
 .price {
   color: #ee4d2d;
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* ================= LINK ================= */
+.link a {
+  font-size: 13px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link a:hover {
+  text-decoration: underline;
 }
 
 /* ================= ACTIONS ================= */
@@ -78,6 +153,25 @@
 }
 
 /* ================= BUTTONS ================= */
+.btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.15);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
 .btn.edit {
   background: #e0ecff;
   color: #2563eb;
@@ -94,7 +188,35 @@
 
 /* ================= EMPTY ================= */
 .empty {
-  padding: 24px;
+  padding: 32px;
   text-align: center;
   color: #999;
+  font-size: 14px;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .table-row {
+    grid-template-columns: 60px 1fr;
+    grid-auto-rows: auto;
+    row-gap: 8px;
+  }
+
+  .price,
+  .link,
+  .actions {
+    grid-column: 2 / -1;
+  }
 }
