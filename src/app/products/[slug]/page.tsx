@@ -1,15 +1,16 @@
+import Image from 'next/image'
 import { getProductBySlug } from '@/lib/productService'
 import { notFound } from 'next/navigation'
 import '@/styles/product-detail.css'
 
 type ProductPageProps = {
-  params: Promise<{
+  params: {
     slug: string
-  }>
+  }
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params
+  const { slug } = params
   const product = getProductBySlug(slug)
 
   if (!product) {
@@ -17,6 +18,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   const finalPrice = product.offer?.price ?? product.price
+
+  // ✅ ตรวจสอบว่ารูปใช้ได้จริง
+  const hasImage =
+    typeof product.image === 'string' &&
+    (product.image.startsWith('http') || product.image.startsWith('/'))
 
   return (
     <>
@@ -28,14 +34,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
             '@context': 'https://schema.org',
             '@type': 'Product',
             name: product.name,
-            image: product.image,
+            // ✅ ใส่ image เฉพาะตอนมีรูป
+            ...(hasImage && { image: [product.image] }),
             description: product.description,
             offers: {
               '@type': 'Offer',
-              price: product.offer?.price,
+              price: finalPrice,
               priceCurrency: 'THB',
               availability: 'https://schema.org/InStock',
-              url: product.offer?.url,
+              url: product.affiliateUrl,
             },
           }),
         }}
@@ -64,18 +71,23 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
       {/* ===== PAGE UI ===== */}
       <main className="product-page">
-        {/* ===== HEADER ===== */}
         <div className="product-header">
-          {/* IMAGE */}
-          <div className="product-image">
-            <img
-              src={product.image}
-              alt={product.name}
-              loading="lazy"
-            />
-          </div>
+          {/* ===== IMAGE (LCP) ===== */}
+          {hasImage && (
+            <div className="product-image">
+              <Image
+                src={product.image}
+                alt={product.name}
+                width={500}
+                height={500}
+                priority
+                sizes="(max-width: 768px) 100vw, 420px"
+                style={{ width: '100%', height: 'auto' }}
+              />
+            </div>
+          )}
 
-          {/* INFO */}
+          {/* ===== INFO ===== */}
           <div className="product-info">
             <h1>{product.name}</h1>
 
@@ -83,7 +95,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
               หมวดหมู่: {product.category}
             </div>
 
-            {/* PRICE */}
             <div className="product-price">
               <span className="current">
                 ฿{finalPrice.toLocaleString()}
@@ -101,7 +112,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
               )}
             </div>
 
-            {/* BUY BUTTON */}
             <a
               href={product.affiliateUrl}
               target="_blank"
@@ -121,7 +131,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </section>
 
-        {/* ===== FAQ ===== */}
+        {/* ===== FAQ UI ===== */}
         {product.faqs && product.faqs.length > 0 && (
           <section className="product-section">
             <h2>คำถามที่พบบ่อย</h2>

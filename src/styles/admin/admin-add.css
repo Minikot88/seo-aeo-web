@@ -1,173 +1,154 @@
-/* ================= FORM LAYOUT ================= */
-.admin-form {
-  max-width: 560px;
-}
+/* ===============================
+   ADMIN – ADD PRODUCT (FULL)
+   รองรับ Dark / Light Mode
+   =============================== */
 
-/* ================= FORM CARD ================= */
-.form-card {
-  background: #fff;
-  border-radius: 16px;
+/* ===== LAYOUT ===== */
+.admin {
   padding: 24px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  animation: fadeUp .35s ease both;
+  max-width: 900px;
+  margin: auto;
+  box-sizing: border-box;
 }
 
-.form-card h2 {
-  font-size: 16px;
-  margin: 24px 0 12px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #eee;
+.admin-form {
+  width: 100%;
 }
 
-/* ================= FORM GROUP ================= */
-.form-group {
+/* ===== HEADER ===== */
+.form-header {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.form-group label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #333;
+.form-header h1 {
+  font-size: 22px;
+  margin: 0;
 }
 
-.form-group small {
-  font-size: 11px;
-  color: #888;
+/* ===== CARD ===== */
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
 }
 
-/* ================= INPUT / TEXTAREA ================= */
-.form-group input,
-.form-group textarea {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+/* ===== SECTION TITLE ===== */
+.admin-form h2 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
+
+/* ===== INPUT / TEXTAREA ===== */
+.admin-form input,
+.admin-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+
+  background: var(--input-bg);
+  color: var(--input-text);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
   font-size: 14px;
-  outline: none;
-  transition: border .2s ease, box-shadow .2s ease, background .2s ease;
+  box-sizing: border-box;
 }
 
-.form-group textarea {
+.admin-form textarea {
+  min-height: 90px;
   resize: vertical;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-  background: #fff;
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+  color: var(--muted);
 }
 
-/* ================= FORM ROW ================= */
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+.admin-form input:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
 }
 
-/* ================= FORM ACTIONS ================= */
+/* ===== FAQ ITEM ===== */
+.admin-form > div > div {
+  padding: 12px;
+  margin-bottom: 12px;
+
+  background: transparent;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: var(--primary-text);
+  border: none;
+}
+
+.btn.primary:hover {
+  opacity: 0.9;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn.ghost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== ACTIONS ===== */
 .form-actions {
   margin-top: 24px;
   display: flex;
   justify-content: flex-end;
 }
 
-.form-actions button {
-  min-width: 140px;
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 640px) {
-  .form-card {
-    padding: 18px;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* ================= FORM ACTIONS ================= */
-.form-actions {
-  margin-top: 28px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-/* ================= BUTTON VARIANTS ================= */
-.btn.ghost {
-  background: transparent;
-  color: #555;
-  border: 1px solid #ddd;
-}
-
-.btn.ghost:hover {
-  background: #f3f4f6;
-}
-
-/* ================= SAVE BUTTON ================= */
-.save-btn {
-  min-width: 160px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-/* ================= LOADING SPINNER ================= */
-.spinner {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,.5);
-  border-top-color: #fff;
-  animation: spin .8s linear infinite;
-}
-
-/* ================= ANIMATION ================= */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 640px) {
-  .form-actions {
-    flex-direction: column-reverse;
-    align-items: stretch;
-  }
-
-  .save-btn {
-    width: 100%;
-  }
-}
-
-
-/* ================= FORM HEADER ================= */
-.form-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* 🔥 ตัวสำคัญ */
-  margin-bottom: 16px;
-}
-
-.form-header h1 {
-  margin: 0;
-  font-size: 22px;
-}
-
-/* ปุ่มย้อนกลับด้านบน */
+/* ===== BACK BUTTON ===== */
 .back-top {
-  white-space: nowrap;
+  font-size: 13px;
+  padding: 6px 12px;
 }
 
-/* hover */
-.back-top:hover {
-  background: #f3f4f6;
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  .admin {
+    padding: 16px;
+  }
+
+  .form-card {
+    padding: 16px;
+  }
+
+  .form-header h1 {
+    font-size: 18px;
+  }
 }

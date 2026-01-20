@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { Product } from '@/types/product'
-import '@/styles/admin/admin-base.css'
 import '@/styles/admin/admin-list.css'
+import '@/styles/admin/admin-logout.css'
 
 type Props = {
   products: Product[]
@@ -12,6 +13,7 @@ type Props = {
 
 export default function AdminClient({ products }: Props) {
   const [q, setQ] = useState('')
+  const [showLogout, setShowLogout] = useState(false)
   const router = useRouter()
 
   const filtered = products.filter(p =>
@@ -39,7 +41,17 @@ export default function AdminClient({ products }: Props) {
 
   return (
     <main className="admin">
-      {/* Header */}
+      {/* ===== TOP BAR ===== */}
+      <div className="admin-topbar">
+        <button
+          className="logout-btn"
+          onClick={() => setShowLogout(true)}
+        >
+          ออกจากระบบ
+        </button>
+      </div>
+
+      {/* ===== HEADER ===== */}
       <div className="admin-header">
         <div>
           <h1>📦 จัดการสินค้า</h1>
@@ -53,16 +65,16 @@ export default function AdminClient({ products }: Props) {
         </a>
       </div>
 
-      {/* Search */}
+      {/* ===== SEARCH ===== */}
       <div className="admin-search">
         <input
-          placeholder="🔍 ค้นหาสินค้า ชื่อ / หมวด / รายละเอียด..."
+          placeholder="🔍 ค้นหาสินค้า..."
           value={q}
           onChange={e => setQ(e.target.value)}
         />
       </div>
 
-      {/* Table */}
+      {/* ===== TABLE ===== */}
       <div className="table-card">
         <div className="table-row header">
           <div>รูป</div>
@@ -73,33 +85,38 @@ export default function AdminClient({ products }: Props) {
         </div>
 
         {filtered.map(p => {
-          const finalPrice =
-            p.discount
-              ? p.price - (p.price * p.discount) / 100
-              : p.price
+          const finalPrice = p.discount
+            ? p.price - (p.price * p.discount) / 100
+            : p.price
+
+          const hasImage =
+            typeof p.image === 'string' &&
+            (p.image.startsWith('http') || p.image.startsWith('/'))
 
           return (
             <div className="table-row" key={p.id}>
-              {/* รูป */}
               <div className="thumb">
-                <img src={p.image} alt={p.name} />
-              </div>
-
-              {/* ชื่อ + หมวด */}
-              <div className="name">
-                <strong>{p.name}</strong>
-                <div className="category">{p.category}</div>
-                {p.discount && (
-                  <span className="discount">-{p.discount}%</span>
+                {hasImage ? (
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={80}
+                    height={50}
+                  />
+                ) : (
+                  <div className="no-image">ไม่มีรูป</div>
                 )}
               </div>
 
-              {/* ราคา */}
+              <div className="name">
+                <strong>{p.name}</strong>
+                <div className="category">{p.category}</div>
+              </div>
+
               <div className="price">
                 ฿{finalPrice.toLocaleString()}
               </div>
 
-              {/* Affiliate */}
               <div className="link">
                 <a
                   href={p.affiliateUrl}
@@ -110,9 +127,11 @@ export default function AdminClient({ products }: Props) {
                 </a>
               </div>
 
-              {/* Actions */}
               <div className="actions">
-                <a href={`/admin/edit/${p.id}`} className="btn edit">
+                <a
+                  href={`/admin/edit/${p.id}`}
+                  className="btn edit"
+                >
                   แก้ไข
                 </a>
                 <button
@@ -130,6 +149,32 @@ export default function AdminClient({ products }: Props) {
           <div className="empty">ไม่พบสินค้า</div>
         )}
       </div>
+
+      {/* ===== LOGOUT MODAL ===== */}
+      {showLogout && (
+        <div className="logout-backdrop">
+          <div className="logout-modal">
+            <h3>ออกจากระบบ</h3>
+            <p>คุณต้องการออกจากระบบผู้ดูแลหรือไม่</p>
+
+            <div className="logout-actions">
+              <button
+                className="btn cancel"
+                onClick={() => setShowLogout(false)}
+              >
+                ยกเลิก
+              </button>
+
+              <a
+                href="/api/auth/logout"
+                className="btn danger"
+              >
+                ออกจากระบบ
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

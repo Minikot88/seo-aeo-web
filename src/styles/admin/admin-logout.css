@@ -1,0 +1,114 @@
+/* ===== TOP BAR ===== */
+.admin-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.logout-btn {
+  background: transparent;
+  border: none;
+  color: #e53935;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+/* ===== BACKDROP ===== */
+.logout-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+/* ===== MODAL ===== */
+.logout-modal {
+  width: 100%;
+  max-width: 360px;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 24px 22px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.25s ease;
+}
+
+.logout-modal h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.logout-modal p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* ===== ACTIONS ===== */
+.logout-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.logout-actions .btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.logout-actions .btn.cancel {
+  background: #eee;
+  color: #333;
+}
+
+.logout-actions .btn.danger {
+  background: #e53935;
+  color: #fff;
+}
+
+.logout-actions .btn.danger:hover {
+  background: #d32f2f;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== DARK MODE ===== */
+.dark .logout-modal p {
+  color: #aaa;
+}
+
+.dark .logout-actions .btn.cancel {
+  background: #2a2a2a;
+  color: #eee;
+}

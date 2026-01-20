@@ -1,21 +1,168 @@
-.admin-edit {
-  max-width: 720px;
+/* ===============================
+   ADMIN – EDIT PRODUCT
+   Same Style as ADD PAGE
+   =============================== */
+
+/* ===== LAYOUT ===== */
+.admin {
+  padding: 24px;
+  max-width: 900px;
+  margin: auto;
+  box-sizing: border-box;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin-bottom: 16px;
+.admin-form {
+  width: 100%;
 }
 
-.form-grid input,
-.form-grid textarea {
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
+/* ===== HEADER ===== */
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
-.form-grid textarea {
-  min-height: 80px;
+.form-header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* ===== CARD ===== */
+.form-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+}
+
+/* ===== SECTION ===== */
+.admin-form h2 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+
+  border-left: 4px solid var(--primary);
+  padding-left: 10px;
+}
+
+/* ===== INPUT / TEXTAREA ===== */
+.admin-form input,
+.admin-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+
+  background: var(--input-bg);
+  color: var(--input-text);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.admin-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.admin-form input::placeholder,
+.admin-form textarea::placeholder {
+  color: var(--muted);
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: var(--primary-text);
+  border: none;
+}
+
+.btn.primary:hover {
+  opacity: 0.9;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn.ghost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== ACTIONS ===== */
+.form-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-top {
+  font-size: 13px;
+  padding: 6px 12px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 640px) {
+  .admin {
+    padding: 16px;
+  }
+
+  .form-card {
+    padding: 16px;
+  }
+
+  .form-header h1 {
+    font-size: 18px;
+  }
+}
+
+/* ===== FAQ ===== */
+.faq-item {
+  padding: 12px;
+  margin-bottom: 12px;
+
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+.faq-item .btn.delete {
+  margin-top: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.faq-item .btn.delete:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
 }

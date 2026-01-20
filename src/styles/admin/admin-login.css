@@ -1,0 +1,157 @@
+/* =========================================
+   ADMIN LOGIN – MATCH DESIGN (FINAL)
+========================================= */
+
+/* ===== PAGE ===== */
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: radial-gradient(
+    circle at center,
+    #f5f7f6 0%,
+    #eef2f1 45%,
+    #e6ecea 100%
+  );
+  box-sizing: border-box;
+}
+
+/* ===== CARD ===== */
+.login-card {
+  width: 100%;
+  max-width: 680px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeUp 0.45s ease;
+}
+
+/* ===== TITLE ===== */
+.login-card h2 {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* ===== SUBTITLE ===== */
+.login-card .subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 34px;
+}
+
+/* ===== LINE BUTTON ===== */
+.btn-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  background: #06c755;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  transition: all 0.18s ease;
+}
+
+.btn-line:hover {
+  background: #05b84c;
+  box-shadow: 0 10px 26px rgba(6, 199, 85, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-line:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* ===== LINE ICON ===== */
+.line-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #06c755;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   📱 MOBILE
+========================================= */
+@media (max-width: 640px) {
+  .login-card {
+    padding: 36px 22px;
+  }
+
+  .login-card h2 {
+    font-size: 22px;
+  }
+
+  .btn-line {
+    height: 52px;
+    font-size: 15px;
+  }
+}
+
+/* =========================================
+   💻 LARGE DESKTOP
+========================================= */
+@media (min-width: 1024px) {
+  .login-card {
+    padding: 52px 56px;
+  }
+}
+
+/* =========================================
+   🌙 DARK MODE
+========================================= */
+.dark .admin-login {
+  background: radial-gradient(
+    circle at center,
+    #111 0%,
+    #0d0f0f 60%,
+    #0a0c0c 100%
+  );
+}
+
+.dark .login-card {
+  background: #161616;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dark .login-card h2 {
+  color: #f5f5f5;
+}
+
+.dark .login-card .subtitle {
+  color: #aaa;
+}

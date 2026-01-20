@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Product, FAQ } from '@/types/product'
-import '@/styles/admin/admin-base.css'
+import { Product, FAQ } from '@/types/product'       
 import '@/styles/admin/admin-add.css'
 
 export default function AddProductPage() {
