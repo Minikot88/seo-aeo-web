@@ -6,7 +6,9 @@ export type FAQ = {
 export type Offer = {
   price: number
   priceCurrency: 'THB'
-  availability: 'InStock' | 'OutOfStock'
+  availability:
+    | 'https://schema.org/InStock'
+    | 'https://schema.org/OutOfStock'
   url: string
 }
 
@@ -17,7 +19,10 @@ export type Product = {
   price: number
   discount?: number
   category: string
-  image: string
+
+  // image รองรับทั้ง string และหลายรูป
+  image: string | string[]
+
   affiliateUrl: string
   description: string
 
@@ -25,7 +30,13 @@ export type Product = {
   seoTitle?: string
   seoDescription?: string
 
-  // AEO / Schema
+  // AEO
   faqs?: FAQ[]
   offer?: Offer
+
+  // Rich Snippet (optional)
+  brand?: string
+  sku?: string
+  ratingValue?: number
+  reviewCount?: number
 }

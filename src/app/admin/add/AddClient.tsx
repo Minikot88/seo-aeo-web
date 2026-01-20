@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Product, FAQ } from '@/types/product'       
+import { Product, FAQ } from '@/types/product'
 import '@/styles/admin/admin-add.css'
 
 export default function AddProductPage() {
@@ -64,7 +64,7 @@ export default function AddProductPage() {
           ? price - (price * discount) / 100
           : price,
         priceCurrency: 'THB',
-        availability: 'InStock',
+        availability: 'https://schema.org/InStock', // ✅ FIX
         url: affiliateUrl,
       },
     }

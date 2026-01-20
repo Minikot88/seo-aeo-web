@@ -6,9 +6,13 @@ export const siteSEO: Metadata = {
     template: '%s | AFF SHOP',
   },
   description: 'เว็บแนะนำสินค้า Affiliate จาก Shopee',
-  metadataBase: new URL('https://yourdomain.com'),
+
+  metadataBase: new URL('https://seo-aeo-web.netlify.app'),
+
   openGraph: {
     type: 'website',
     siteName: 'AFF SHOP',
+    title: 'AFF SHOP',
+    description: 'เว็บแนะนำสินค้า Affiliate จาก Shopee',
   },
 }

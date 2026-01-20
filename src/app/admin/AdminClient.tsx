@@ -89,16 +89,25 @@ export default function AdminClient({ products }: Props) {
             ? p.price - (p.price * p.discount) / 100
             : p.price
 
+          // ✅ แปลง image ให้เหลือ string เสมอ
+          const imageSrc =
+            typeof p.image === 'string'
+              ? p.image
+              : Array.isArray(p.image)
+              ? p.image[0]
+              : undefined
+
           const hasImage =
-            typeof p.image === 'string' &&
-            (p.image.startsWith('http') || p.image.startsWith('/'))
+            typeof imageSrc === 'string' &&
+            (imageSrc.startsWith('http') ||
+              imageSrc.startsWith('/'))
 
           return (
             <div className="table-row" key={p.id}>
               <div className="thumb">
                 {hasImage ? (
                   <Image
-                    src={p.image}
+                    src={imageSrc}
                     alt={p.name}
                     width={80}
                     height={50}

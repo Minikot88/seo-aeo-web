@@ -1,32 +1,58 @@
 import Image from 'next/image'
-import { getProductBySlug } from '@/lib/productService'
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
+import { getProductBySlug } from '@/lib/productService'
 import '@/styles/product-detail.css'
 
-type ProductPageProps = {
-  params: {
+type PageProps = {
+  params: Promise<{
     slug: string
+  }>
+}
+
+/* ===================== SEO META ===================== */
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params
+  const product = getProductBySlug(slug)
+
+  if (!product) return {}
+
+  const images = Array.isArray(product.image)
+    ? product.image
+    : [product.image]
+
+  return {
+    title: product.seoTitle ?? product.name,
+    description:
+      product.seoDescription ??
+      product.description.slice(0, 160),
+    openGraph: {
+      title: product.name,
+      description: product.seoDescription,
+      images,
+      type: 'website', // ✅ FIX
+    },
   }
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = params
+
+/* ===================== PAGE ===================== */
+export default async function ProductPage({ params }: PageProps) {
+  const { slug } = await params
   const product = getProductBySlug(slug)
 
-  if (!product) {
-    notFound()
-  }
+  if (!product) notFound()
 
   const finalPrice = product.offer?.price ?? product.price
-
-  // ✅ ตรวจสอบว่ารูปใช้ได้จริง
-  const hasImage =
-    typeof product.image === 'string' &&
-    (product.image.startsWith('http') || product.image.startsWith('/'))
+  const images = Array.isArray(product.image)
+    ? product.image
+    : [product.image]
 
   return (
     <>
-      {/* ===== Product + Offer Schema ===== */}
+      {/* ===== Product Schema ===== */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -34,22 +60,34 @@ export default async function ProductPage({ params }: ProductPageProps) {
             '@context': 'https://schema.org',
             '@type': 'Product',
             name: product.name,
-            // ✅ ใส่ image เฉพาะตอนมีรูป
-            ...(hasImage && { image: [product.image] }),
+            image: images,
             description: product.description,
+            brand: product.brand,
+            sku: product.sku,
             offers: {
               '@type': 'Offer',
               price: finalPrice,
               priceCurrency: 'THB',
-              availability: 'https://schema.org/InStock',
+              availability:
+                product.offer?.availability ??
+                'https://schema.org/InStock',
               url: product.affiliateUrl,
             },
+            ...(product.ratingValue && product.reviewCount
+              ? {
+                  aggregateRating: {
+                    '@type': 'AggregateRating',
+                    ratingValue: product.ratingValue,
+                    reviewCount: product.reviewCount,
+                  },
+                }
+              : {}),
           }),
         }}
       />
 
       {/* ===== FAQ Schema ===== */}
-      {product.faqs && product.faqs.length > 0 && (
+      {product.faqs?.length && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -69,14 +107,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
         />
       )}
 
-      {/* ===== PAGE UI ===== */}
+      {/* ================= UI ================= */}
       <main className="product-page">
         <div className="product-header">
-          {/* ===== IMAGE (LCP) ===== */}
-          {hasImage && (
+          {/* IMAGE */}
+          {images[0] && (
             <div className="product-image">
               <Image
-                src={product.image}
+                src={images[0]}
                 alt={product.name}
                 width={500}
                 height={500}
@@ -87,7 +125,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             </div>
           )}
 
-          {/* ===== INFO ===== */}
+          {/* INFO */}
           <div className="product-info">
             <h1>{product.name}</h1>
 
@@ -123,21 +161,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
         </div>
 
-        {/* ===== DESCRIPTION ===== */}
+        {/* DESCRIPTION */}
         <section className="product-section">
           <h2>รายละเอียดสินค้า</h2>
-          <div className="product-description">
-            {product.description}
-          </div>
+          <p>{product.description}</p>
         </section>
 
-        {/* ===== FAQ UI ===== */}
-        {product.faqs && product.faqs.length > 0 && (
+        {/* FAQ UI */}
+        {product.faqs?.length && (
           <section className="product-section">
             <h2>คำถามที่พบบ่อย</h2>
-
-            {product.faqs.map((faq, index) => (
-              <div key={index} className="faq-item">
+            {product.faqs.map((faq, i) => (
+              <div key={i} className="faq-item">
                 <h3>{faq.question}</h3>
                 <p>{faq.answer}</p>
               </div>

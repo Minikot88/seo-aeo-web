@@ -1,14 +1,18 @@
-export const homeFAQSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
+import { FAQ } from '@/types/product'
+
+export function faqSchema(faqs?: FAQ[]) {
+  if (!faqs || faqs.length === 0) return null
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map(f => ({
       "@type": "Question",
-      name: "เว็บนี้ขายอะไร",
+      name: f.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: "เว็บนี้แนะนำสินค้าและส่งต่อไปยัง Shopee ผ่านลิงก์ Affiliate"
-      }
-    }
-  ]
+        text: f.answer,
+      },
+    })),
+  }
 }
